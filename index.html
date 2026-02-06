@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -54,6 +55,16 @@
       gap: 10px;
     }
 
+    /* مركز الهيدر - زر الحذف يظهر في المنتصف */
+    .header-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     #authSection {
       padding: 30px;
       text-align: center;
@@ -63,21 +74,14 @@
       justify-content: center;
       align-items: center;
     }
-    
-    #authSection button {
-      background: #3498db;
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 50px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 20px;
-    }
 
-    #authSection button:hover {
-      background: #2980b9;
+    /* إخفاء زر تسجيل الدخول */
+  
+    
+    #authSection p {
+      margin-bottom: 20px;
+      color: #666;
+      font-size: 18px;
     }
 
     #chatSection {
@@ -103,7 +107,7 @@
       animation: fadeIn 0.3s ease;
     }
 
-    .message img {
+    .message img.avatar {
       width: 40px;
       height: 40px;
       border-radius: 50%;
@@ -118,13 +122,14 @@
       border-radius: 18px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.05);
       max-width: 70%;
+      word-break: break-word;
     }
 
     .message-header {
       font-weight: bold;
       color: #2c3e50;
       font-size: 14px;
-      margin-bottom: 4px;
+      margin-bottom: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -142,6 +147,77 @@
     .message-text {
       font-size: 15px;
       color: #333;
+      line-height: 1.5;
+    }
+
+    /* تنسيق الروابط */
+    .message-text a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .message-text a:hover {
+      color: #2980b9;
+      text-decoration: underline;
+    }
+
+    /* تنسيق المحتوى المضمن */
+    .embedded-content {
+      margin-top: 10px;
+      border-radius: 10px;
+      overflow: hidden;
+      max-width: 100%;
+      position: relative;
+    }
+
+    .embedded-content iframe,
+    .embedded-content img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .embedded-content iframe {
+      height: 225px;
+      border: none;
+    }
+
+    .embedded-content img {
+      max-height: 300px;
+      object-fit: cover;
+    }
+
+    /* مؤشر الصورة */
+    .image-indicator {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* مؤشر الفيديو */
+    .video-indicator {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(255, 0, 0, 0.8);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
     #inputArea {
@@ -150,6 +226,7 @@
       background: white;
       border-top: 1px solid #eee;
       align-items: center;
+      gap: 10px;
     }
 
     #messageInput {
@@ -168,7 +245,6 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      margin-right: 10px;
       cursor: pointer;
       font-size: 18px;
       transition: 0.2s;
@@ -186,9 +262,37 @@
       cursor: not-allowed;
     }
 
+    /* زر حذف جميع الرسائل في الأسفل */
+    #deleteAllBottomBtn {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      transition: 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      display: none; /* مخفي بشكل افتراضي */
+    }
+
+    #deleteAllBottomBtn:hover {
+      background: #c0392b;
+      transform: scale(1.1);
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
 
     .logout-btn {
@@ -197,7 +301,7 @@
       border: none;
       cursor: pointer;
       font-size: 18px;
-      display: flex;
+      display: non;
       align-items: center;
       gap: 5px;
       padding: 8px 15px;
@@ -214,21 +318,53 @@
       background: #e74c3c;
       color: white;
       border: none;
-      padding: 8px 15px;
-      border-radius: 20px;
+      padding: 12px 20px;
+      border-radius: 25px;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 16px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 8px;
       transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+      font-weight: bold;
+      animation: pulse 2s infinite;
     }
 
     .delete-all-btn:hover {
       background: #c0392b;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+      animation: none;
+    }
+
+    .delete-all-btn:active {
+      transform: translateY(0);
     }
 
     /* تخصيص عصا التمرير */
+  #deleteAllBtn { display: none !important; } #deleteAllBtn.show-admin { display: flex !important; }
+  
+    header {
+  background: linear-gradient(90deg, #2c3e50, #4a6491);
+  color: white;
+  padding: 20px 30px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 30px 30px;
+  box-shadow: 0 8px 25px rgba(44, 62, 80, 0.2);
+  animation: subtleBounce 5s infinite alternate ease-in-out;
+}
+
+@keyframes subtleBounce {
+  0% { border-radius: 0 0 30px 30px; }
+  100% { border-radius: 0 0 40px 40px; }
+}
     #messages::-webkit-scrollbar {
       width: 8px;
     }
@@ -278,38 +414,185 @@
       border-radius: 50%;
       border: 2px solid white;
     }
-  #logoutBtn { display: none !important; }
+
+  #logoutBtn { width: 40px !important; height: 40px !important; padding: 0 !important; background: rgba(231, 76, 60, 0.1) !important; border: 2px solid #e74c3c !important; display: none !important; } #logoutBtn.show-admin { display: flex !important; }
+    .admin-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: rgba(231, 76, 60, 0.1);
+      padding: 8px 15px;
+      border-radius: 20px;
+      border: 2px solid #e74c3c;
+    }
+
+    .admin-crown {
+      color: #f1c40f;
+      font-size: 20px;
+      animation: crownPulse 2s infinite;
+    }
+
+    @keyframes crownPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* إشعار تلقائي تسجيل الدخول */
+    .auto-login-notice {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
+      text-align: center;
+      border: 1px solid #e9ecef;
+      max-width: 400px;
+    }
+
+    .auto-login-notice p {
+      margin: 0;
+      color: #495057;
+      font-size: 14px;
+    }
+
+    .auto-login-notice .email {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    /* تلميح الأدوات */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 120px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -60px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 12px;
+    }
+
+ #messageInput { 
+  border-radius: 15px 30px 15px 30px !important; 
+  border: 2px solid transparent !important; 
+  background: linear-gradient(#f8f9fa, #f8f9fa) padding-box, linear-gradient(135deg, #3498db, #2ecc71) border-box !important; 
+  box-shadow: 0 10px 40px rgba(52, 152, 219, 0.15) !important; 
+  padding: 14px 24px !important; 
+}
+
+#messageInput:focus { 
+  border-radius: 30px 15px 30px 15px !important; 
+  box-shadow: 0 15px 50px rgba(52, 152, 219, 0.25) !important; 
+  transform: scale(1.02) !important; 
+} 
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+  .embedded-content iframe { 
+  animation: magicVideo 6s ease-in-out infinite !important; 
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.4), 0 0 80px rgba(0, 255, 255, 0.3), 0 0 120px rgba(255, 255, 0, 0.2) !important; 
+  border-radius: 20px !important; 
+  transform-origin: center !important; 
+}
+
+@keyframes magicVideo { 
+  0% { transform: scale(1) rotate(0deg); filter: hue-rotate(0deg); box-shadow: 0 0 40px rgba(255, 0, 0, 0.4), 0 0 80px rgba(0, 255, 255, 0.3), 0 0 120px rgba(255, 255, 0, 0.2); } 
+  25% { transform: scale(1.02) rotate(0.5deg); filter: hue-rotate(90deg); box-shadow: 0 0 50px rgba(0, 255, 0, 0.4), 0 0 90px rgba(255, 0, 255, 0.3), 0 0 130px rgba(0, 0, 255, 0.2); } 
+  50% { transform: scale(1.05) rotate(-0.5deg); filter: hue-rotate(180deg); box-shadow: 0 0 60px rgba(255, 255, 0, 0.4), 0 0 100px rgba(0, 255, 255, 0.3), 0 0 140px rgba(255, 0, 0, 0.2); } 
+  75% { transform: scale(1.02) rotate(0.3deg); filter: hue-rotate(270deg); box-shadow: 0 0 50px rgba(0, 0, 255, 0.4), 0 0 90px rgba(255, 0, 0, 0.3), 0 0 130px rgba(0, 255, 0, 0.2); } 
+  100% { transform: scale(1) rotate(0deg); filter: hue-rotate(360deg); box-shadow: 0 0 40px rgba(255, 0, 0, 0.4), 0 0 80px rgba(0, 255, 255, 0.3), 0 0 120px rgba(255, 255, 0, 0.2); } 
+}
+  
+  .message-header span:first-child { 
+  font-family: 'Georgia', 'Times New Roman', serif !important; 
+  font-weight: bold !important; 
+  font-variant: small-caps !important; 
+  letter-spacing: 1px !important; 
+  text-transform: capitalize !important; 
+  padding: 6px 18px !important; 
+  border-radius: 30px !important; 
+  color: white !important; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important; 
+  display: inline-block !important; 
+  min-width: 120px !important; 
+  text-align: center !important; 
+  border: 2px solid rgba(255,255,255,0.3) !important; 
+  background: var(--user-color, linear-gradient(135deg, #667eea, #764ba2)) !important; 
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3) !important; 
+}
+  .message img.avatar { 
+  border: 4px solid transparent !important; 
+  background: 
+    linear-gradient(white, white) padding-box,
+    var(--user-color, linear-gradient(135deg, #667eea, #764ba2)) border-box !important; 
+  border-radius: 50% !important; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15) !important; 
+}
   </style>
 </head>
 <body>
 
   <div class="container">
     <header>
+      
       <div class="user-info" id="userInfo" style="display:none;">
         <img id="userPhoto" src="" alt="">
         <span id="userName"></span>
       </div>
       
-      <div class="header-controls">
+      <!-- زر الحذف في وسط الهيدر -->
+      💬
+      <div class="header-center">
         <button class="delete-all-btn" id="deleteAllBtn" style="display:none;" title="حذف جميع الرسائل">
-          <i class="fas fa-trash"></i> حذف السجل
-        </button>
-        <button class="logout-btn" id="logoutBtn" style="display:none;" title="تسجيل الخروج">
-         
+          <i class="fas fa-crown admin-crown"></i>
+          <i class="fas fa-trash"></i> حذف جميع الرسائل
         </button>
       </div>
+      
+      <div class="header-controls">
+        <button class="logout-btn" id="logoutBtn" style="display:none;" title="تسجيل الخروج">
+          <i class="fas fa-sign-out-alt"></i> خروج
+        </button>
+      </div>
+      🩸
     </header>
 
     <div id="authSection">
-      <p>يرجى تسجيل الدخول للانضمام إلى الغرفة</p>
-      <br>
-      <button id="loginBtn"><i class="fab fa-google"></i> الدخول بحساب Google</button>
+      <p>جاري تسجيل الدخول تلقائياً...</p>
+      <div class="auto-login-notice">
+        
+        <p class="email" id="loginEmail"></p>
+      </div>
+      <!-- تم إخفاء زر تسجيل الدخول -->
+      <button id="loginBtn" style="display:none;"><i class="fab fa-google"></i> الدخول بحساب Google</button>
     </div>
 
     <div id="chatSection">
       <div id="messages"></div>
       <div id="inputArea">
-        <input type="text" id="messageInput" placeholder="اكتب رسالتك..." maxlength="300" />
+        <input type="text" id="messageInput" placeholder="اكتب رسالتك  ..." maxlength="500" />
+        
+        <!-- زر حذف جميع الرسائل في الأسفل -->
+        <div class="tooltip">
+          <button id="deleteAllBottomBtn" title="حذف جميع الرسائل">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+          <span class="tooltiptext">حذف جميع الرسائل</span>
+        </div>
+        
         <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
       </div>
       <div class="limit-info" id="limitInfo"></div>
@@ -318,349 +601,7 @@
 
   <!-- Firebase SDKs -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
-    import {
-      getAuth,
-      GoogleAuthProvider,
-      signInWithPopup,
-      signOut,
-      onAuthStateChanged
-    } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
-    import {
-      getFirestore,
-      collection,
-      addDoc,
-      query,
-      where,
-      getDocs,
-      orderBy,
-      limit,
-      onSnapshot,
-      serverTimestamp,
-      deleteDoc,
-      doc,
-      getCountFromServer
-    } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyDYKCCTcurNcJslrNKqdiJCoIIK-YZArB4",
-      authDomain: "sbaq-fc46f.firebaseapp.com",
-      projectId: "sbaq-fc46f",
-      storageBucket: "sbaq-fc46f.firebasestorage.app",
-      messagingSenderId: "1026865750415",
-      appId: "1:1026865750415:web:0ee39a717bcafaa0d06bfa"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-    const messagesRef = collection(db, "chatMessages");
-
-    const DAILY_MESSAGE_LIMIT = 3;
-    const ADMIN_EMAIL = "hsn5@H.com";
-
-    let currentUser = null;
-    let userMessageCount = 0;
-    let isAdmin = false;
-
-    const authSection = document.getElementById("authSection");
-    const chatSection = document.getElementById("chatSection");
-    const messagesDiv = document.getElementById("messages");
-    const messageInput = document.getElementById("messageInput");
-    const sendBtn = document.getElementById("sendBtn");
-    const loginBtn = document.getElementById("loginBtn");
-    const logoutBtn = document.getElementById("logoutBtn");
-    const deleteAllBtn = document.getElementById("deleteAllBtn");
-    const limitInfo = document.getElementById("limitInfo");
-    const userInfo = document.getElementById("userInfo");
-    const userPhoto = document.getElementById("userPhoto");
-    const userName = document.getElementById("userName");
-
-    async function getTodaysMessageCount(userId) {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const tomorrow = new Date(today);
-      tomorrow.setDate(tomorrow.getDate() + 1);
-
-      const q = query(
-        messagesRef,
-        where("uid", "==", userId),
-        where("timestamp", ">=", today),
-        where("timestamp", "<", tomorrow)
-      );
-
-      const snapshot = await getCountFromServer(q);
-      return snapshot.data().count;
-    }
-
-    async function updateMessageLimit() {
-      if (!currentUser || isAdmin) {
-        limitInfo.textContent = isAdmin ? "⚡ أنت مسؤول - يمكنك إرسال رسائل غير محدودة" : "";
-        sendBtn.disabled = false;
-        return;
-      }
-
-      userMessageCount = await getTodaysMessageCount(currentUser.uid);
-      const remaining = DAILY_MESSAGE_LIMIT - userMessageCount;
-
-      if (remaining <= 0) {
-   if (!isAdmin && userMessageCount >= DAILY_MESSAGE_LIMIT) {
-  alert("⚠️ لقد استنفدت عدد الرسائل المسموح به اليوم (3 رسائل)");
-  return;
-}
-        limitInfo.className = "limit-info limit-warning";
-        sendBtn.disabled = true;
-        messageInput.placeholder = "لقد استنفدت عدد الرسائل اليوم";
-      } else {
-        limitInfo.textContent = `📊 الرسائل المتبقية اليوم: ${remaining} من ${DAILY_MESSAGE_LIMIT}`;
-        limitInfo.className = "limit-info";
-        sendBtn.disabled = false;
-        messageInput.placeholder = "اكتب رسالتك...";
-      }
-    }
-
-    async function deleteAllMessages() {
-      if (!isAdmin) return;
-
-      if (!confirm("⚠️ هل أنت متأكد من حذف جميع الرسائل؟ لا يمكن التراجع عن هذا الإجراء!")) {
-        return;
-      }
-
-      try {
-        const querySnapshot = await getDocs(messagesRef);
-        const deletePromises = [];
-
-        querySnapshot.forEach((document) => {
-          deletePromises.push(deleteDoc(doc(db, "chatMessages", document.id)));
-        });
-
-        await Promise.all(deletePromises);
-        alert("✓ تم حذف جميع الرسائل بنجاح");
-      } catch (error) {
-        console.error("Error deleting messages:", error);
-        alert("حدث خطأ أثناء حذف الرسائل");
-      }
-    }
-
-    loginBtn.addEventListener("click", async () => {
-      const provider = new GoogleAuthProvider();
-      try {
-        await signInWithPopup(auth, provider);
-      } catch (error) {
-        console.error("Login error:", error);
-        alert("حدث خطأ أثناء تسجيل الدخول.");
-      }
-    });
-
-    logoutBtn.addEventListener("click", () => {
-      signOut(auth).then(() => {
-        messagesDiv.innerHTML = "";
-        userMessageCount = 0;
-        isAdmin = false;
-      });
-    });
-
-    deleteAllBtn.addEventListener("click", deleteAllMessages);
-
-    sendBtn.addEventListener("click", sendMessage);
-    messageInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") sendMessage();
-    });
-
-    async function sendMessage() {
-      const text = messageInput.value.trim();
-      if (!text || !currentUser) return;
-
-      if (!isAdmin && userMessageCount >= DAILY_MESSAGE_LIMIT) {
-        showCustomAlert("لقد استنفدت عدد الرسائل المسموح به اليوم (3 رسائل)");
-
-        return;
-      }
-
-      try {
-        await addDoc(messagesRef, {
-          text,
-          uid: currentUser.uid,
-          name: currentUser.displayName || "مستخدم",
-          email: currentUser.email || "",
-          photoURL: currentUser.photoURL || "https://ui-avatars.com/api/?name=؟&background=3498db&color=fff",
-          timestamp: serverTimestamp(),
-          isAdmin: isAdmin
-        });
-
-        messageInput.value = "";
-        messageInput.focus();
-        
-        if (!isAdmin) {
-          userMessageCount++;
-          updateMessageLimit();
-        }
-      } catch (error) {
-        console.error("Error sending message:", error);
-        alert("حدث خطأ أثناء إرسال الرسالة");
-      }
-    }
-
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        currentUser = user;
-        isAdmin = user.email === ADMIN_EMAIL;
-
-        userPhoto.src = user.photoURL || "https://ui-avatars.com/api/?name=؟&background=3498db&color=fff";
-        userName.textContent = user.displayName || "مستخدم";
-        userInfo.style.display = "flex";
-
-        authSection.style.display = "none";
-        chatSection.style.display = "flex";
-        logoutBtn.style.display = "flex";
-        deleteAllBtn.style.display = isAdmin ? "flex" : "none";
-
-        await updateMessageLimit();
-      } else {
-        currentUser = null;
-        isAdmin = false;
-        userMessageCount = 0;
-
-        authSection.style.display = "flex";
-        chatSection.style.display = "none";
-        logoutBtn.style.display = "none";
-        deleteAllBtn.style.display = "none";
-        userInfo.style.display = "none";
-        limitInfo.textContent = "";
-      }
-    });
-
-  function showCustomAlert(message) {
-  // إخفاء اسم الصفحة والروابط
-  const originalTitle = document.title;
-  document.title = "الموقع"; // اسم عام بدل اسم الصفحة الحقيقي
-  
-  // إنشاء عنصر التنبيه
-  const alertOverlay = document.createElement('div');
-  alertOverlay.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  `;
-  
-  const alertBox = document.createElement('div');
-  alertBox.style.cssText = `
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    text-align: center;
-    max-width: 350px;
-    width: 90%;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-  `;
-  
-  const messageText = document.createElement('p');
-  messageText.textContent = message;
-  messageText.style.cssText = `
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 25px;
-    line-height: 1.5;
-  `;
-  
-  const okButton = document.createElement('button');
-  okButton.textContent = 'موافق';
-  okButton.style.cssText = `
-    background: #3498db;
-    color: white;
-    border: none;
-    padding: 10px 30px;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-  `;
-  
-  okButton.onmouseover = () => okButton.style.background = '#2980b9';
-  okButton.onmouseout = () => okButton.style.background = '#3498db';
-  
-  okButton.onclick = () => {
-    document.body.removeChild(alertOverlay);
-    document.title = originalTitle; // استعادة اسم الصفحة الأصلي
-  };
-  
-  alertBox.appendChild(messageText);
-  alertBox.appendChild(okButton);
-  alertOverlay.appendChild(alertBox);
-  
-  // إخفاء الروابط في التبويب
-  const links = document.querySelectorAll('a');
-  links.forEach(link => {
-    link.setAttribute('data-original-href', link.href);
-    link.href = 'javascript:void(0)';
-  });
-  
-  // استعادة الروابط عند إغلاق التنبيه
-  const restoreLinks = () => {
-    links.forEach(link => {
-      const originalHref = link.getAttribute('data-original-href');
-      if (originalHref) link.href = originalHref;
-    });
-  };
-  
-  okButton.onclick = () => {
-    document.body.removeChild(alertOverlay);
-    document.title = originalTitle;
-    restoreLinks();
-  };
-  
-  document.body.appendChild(alertOverlay);
-  
-  // إغلاق التنبيه عند النقر خارج الصندوق
-  alertOverlay.onclick = (e) => {
-    if (e.target === alertOverlay) {
-      document.body.removeChild(alertOverlay);
-      document.title = originalTitle;
-      restoreLinks();
-    }
-  };
-  
-  // التركيز على الزر
-  okButton.focus();
-}
-    onSnapshot(messagesRef, (snapshot) => {
-      messagesDiv.innerHTML = "";
-      const sortedDocs = snapshot.docs.sort((a, b) => {
-        const timeA = a.data().timestamp?.seconds || 0;
-        const timeB = b.data().timestamp?.seconds || 0;
-        return timeA - timeB;
-      });
-
-      sortedDocs.forEach(doc => {
-        const msg = doc.data();
-        const div = document.createElement("div");
-        div.className = "message";
-        
-        const isCurrentUser = currentUser && msg.uid === currentUser.uid;
-        const messageUserIsAdmin = msg.email === ADMIN_EMAIL || msg.isAdmin;
-        
-        div.innerHTML = `          
-          <img src="${msg.photoURL}" alt="avatar">
-          <div class="message-content">
-            <div class="message-header">
-              <span>${msg.name} ${messageUserIsAdmin ? '<span class="admin-badge">مسؤول</span>' : ''}</span>
-            </div>
-            <div class="message-text">${msg.text}</div>
-          </div>
-        `;
-        messagesDiv.appendChild(div);
-      });
-
-      messagesDiv.scrollTop = messagesDiv.scrollHeight;
-    });
+  const _0x55db92=_0xa8d7;(function(_0x547ebf,_0x2798e4){const _0x3e122a=_0xa8d7,_0x37079f=_0x547ebf();while(!![]){try{const _0x332dbc=parseInt(_0x3e122a(0x131))/0x1+parseInt(_0x3e122a(0x16e))/0x2+parseInt(_0x3e122a(0x197))/0x3*(parseInt(_0x3e122a(0x18e))/0x4)+-parseInt(_0x3e122a(0x173))/0x5*(-parseInt(_0x3e122a(0x141))/0x6)+parseInt(_0x3e122a(0x147))/0x7+parseInt(_0x3e122a(0x103))/0x8*(-parseInt(_0x3e122a(0x14c))/0x9)+-parseInt(_0x3e122a(0x1cd))/0xa;if(_0x332dbc===_0x2798e4)break;else _0x37079f['push'](_0x37079f['shift']());}catch(_0x415a1e){_0x37079f['push'](_0x37079f['shift']());}}}(_0x2191,0x6bce4));import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js';import{getAuth,GoogleAuthProvider,signInWithPopup,signOut,onAuthStateChanged}from'https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js';function _0xa8d7(_0x4d0ff2,_0x2bcfb8){const _0x219184=_0x2191();return _0xa8d7=function(_0xa8d730,_0x2e88bf){_0xa8d730=_0xa8d730-0xfe;let _0xaa0699=_0x219184[_0xa8d730];if(_0xa8d7['VimYlk']===undefined){var _0x521645=function(_0x1e9a18){const _0x3d848e='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x46642b='',_0x1a802b='';for(let _0x246d89=0x0,_0x3e3546,_0xf11f0c,_0x4e1e35=0x0;_0xf11f0c=_0x1e9a18['charAt'](_0x4e1e35++);~_0xf11f0c&&(_0x3e3546=_0x246d89%0x4?_0x3e3546*0x40+_0xf11f0c:_0xf11f0c,_0x246d89++%0x4)?_0x46642b+=String['fromCharCode'](0xff&_0x3e3546>>(-0x2*_0x246d89&0x6)):0x0){_0xf11f0c=_0x3d848e['indexOf'](_0xf11f0c);}for(let _0x2a9f56=0x0,_0x32e0d8=_0x46642b['length'];_0x2a9f56<_0x32e0d8;_0x2a9f56++){_0x1a802b+='%'+('00'+_0x46642b['charCodeAt'](_0x2a9f56)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x1a802b);};_0xa8d7['EiCIWE']=_0x521645,_0x4d0ff2=arguments,_0xa8d7['VimYlk']=!![];}const _0x373903=_0x219184[0x0],_0x11e9d2=_0xa8d730+_0x373903,_0x3b6063=_0x4d0ff2[_0x11e9d2];return!_0x3b6063?(_0xaa0699=_0xa8d7['EiCIWE'](_0xaa0699),_0x4d0ff2[_0x11e9d2]=_0xaa0699):_0xaa0699=_0x3b6063,_0xaa0699;},_0xa8d7(_0x4d0ff2,_0x2bcfb8);}import{getFirestore,collection,addDoc,query,where,orderBy,onSnapshot,serverTimestamp,deleteDoc,doc,getDocs,getCountFromServer}from'https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js';const firebaseConfig={'apiKey':'AIzaSyDYKCCTcurNcJslrNKqdiJCoIIK-YZArB4','authDomain':'sbaq-fc46f.firebaseapp.com','projectId':_0x55db92(0x16b),'storageBucket':_0x55db92(0x19b),'messagingSenderId':_0x55db92(0x118),'appId':'1:1026865750415:web:0ee39a717bcafaa0d06bfa'},app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),messagesRef=collection(db,'chatMessages'),DAILY_MESSAGE_LIMIT=0x3,ADMIN_EMAIL=_0x55db92(0x116);let currentUser=null,userMessageCount=0x0,isAdmin=![];const authSection=document[_0x55db92(0x19e)](_0x55db92(0x132)),chatSection=document['getElementById'](_0x55db92(0x1c2)),messagesDiv=document['getElementById'](_0x55db92(0x142)),messageInput=document[_0x55db92(0x19e)](_0x55db92(0x1a6)),sendBtn=document[_0x55db92(0x19e)]('sendBtn'),loginBtn=document['getElementById']('loginBtn'),logoutBtn=document[_0x55db92(0x19e)](_0x55db92(0x190)),deleteAllBtn=document[_0x55db92(0x19e)](_0x55db92(0x15e)),deleteAllBottomBtn=document[_0x55db92(0x19e)](_0x55db92(0x178)),limitInfo=document['getElementById']('limitInfo'),userInfo=document['getElementById'](_0x55db92(0x1ac)),userPhoto=document[_0x55db92(0x19e)](_0x55db92(0x17d)),userName=document[_0x55db92(0x19e)]('userName'),loginEmail=document['getElementById'](_0x55db92(0x14a));function detectAndCreateLinks(_0x5b7d8b){const _0x4d42b6=_0x55db92,_0x9c572c={'KCemj':_0x4d42b6(0x1c6)},_0x4f45eb=/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtube\.com\/embed\/|youtu\.be\/|youtube\.com\/v\/|youtube\.com\/.*?[?&]v=)([a-zA-Z0-9_-]{11})/g,_0x15bd32=/(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|bmp|svg|ico|tiff|tif|jfif|pjpeg|pjp|avif|apng|webp))/gi,_0x58b426=/(https?:\/\/(?:i\.imgur\.com|imgur\.com\/[a-zA-Z0-9]+|imageshack\.com|flickr\.com|photobucket\.com|tinypic\.com|postimg\.org|ibb\.co|imageban\.com|freeimage\.host|imgbox\.com|imageshack\.us)\/[^\s]+)/gi,_0x29a83c=/(https?:\/\/[^\s]+)/g;let _0x11c9dc=_0x5b7d8b,_0x4cc6dd=![],_0x21d326=![];return _0x11c9dc=_0x11c9dc['replace'](_0x4f45eb,(_0x14508a,_0x2aff17)=>{const _0x2a8058=_0x4d42b6;_0x4cc6dd=!![];const _0x4904a7=_0x2a8058(0x108)+_0x2aff17+_0x2a8058(0x170);return _0x2a8058(0x12c)+_0x4904a7+_0x2a8058(0x1af);}),_0x11c9dc=_0x11c9dc[_0x4d42b6(0x174)](_0x58b426,_0x34ee7d=>{const _0x2d657f=_0x4d42b6;return _0x21d326=!![],_0x2d657f(0x1d6)+_0x34ee7d+_0x2d657f(0x157)+_0x34ee7d+_0x2d657f(0x15b)+_0x34ee7d+_0x2d657f(0x187)+_0x34ee7d+_0x2d657f(0x14e);}),_0x11c9dc=_0x11c9dc[_0x4d42b6(0x174)](_0x15bd32,_0x49852d=>{const _0x3bbb7f=_0x4d42b6;return _0x21d326=!![],_0x3bbb7f(0x1d6)+_0x49852d+_0x3bbb7f(0x157)+_0x49852d+_0x3bbb7f(0x15b)+_0x49852d+_0x3bbb7f(0x187)+_0x49852d+'\x27,\x20\x27_blank\x27)\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20style=\x22cursor:\x20pointer;\x22\x20/>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>';}),_0x11c9dc=_0x11c9dc[_0x4d42b6(0x174)](_0x29a83c,_0x4482a4=>{const _0xe5dc4e=_0x4d42b6;if(_0x4482a4[_0xe5dc4e(0x1bd)](_0x9c572c[_0xe5dc4e(0x123)])||_0x4cc6dd||_0x21d326)return _0x4482a4;return _0xe5dc4e(0x18f)+_0x4482a4+_0xe5dc4e(0x161)+_0x4482a4+_0xe5dc4e(0x198);}),_0x11c9dc;}async function getTodaysMessageCount(_0x2d88aa){const _0x4d90c6=_0x55db92,_0x313632={'ddIKf':function(_0x10267c,_0x195e9f){return _0x10267c+_0x195e9f;},'TJzZW':function(_0x32ad9a,_0x381bc2,_0x213abd,_0x19c053,_0x2f24f7){return _0x32ad9a(_0x381bc2,_0x213abd,_0x19c053,_0x2f24f7);},'BWJij':function(_0x243aa0,_0x797253,_0x4f0238,_0x3dd9c6){return _0x243aa0(_0x797253,_0x4f0238,_0x3dd9c6);},'TDoaA':_0x4d90c6(0x1bc),'ZDwIh':'timestamp','GxAQX':function(_0xa0d844,_0x3f1337,_0x212c15,_0x16f4fe){return _0xa0d844(_0x3f1337,_0x212c15,_0x16f4fe);}},_0x134f4e=new Date();_0x134f4e['setHours'](0x0,0x0,0x0,0x0);const _0x30a865=new Date(_0x134f4e);_0x30a865[_0x4d90c6(0x180)](_0x313632[_0x4d90c6(0x1c5)](_0x30a865[_0x4d90c6(0x158)](),0x1));const _0x2c0a4a=_0x313632[_0x4d90c6(0x1bb)](query,messagesRef,_0x313632['BWJij'](where,_0x313632['TDoaA'],'==',_0x2d88aa),_0x313632[_0x4d90c6(0x1ad)](where,_0x313632[_0x4d90c6(0x18d)],'>=',_0x134f4e),_0x313632['GxAQX'](where,'timestamp','<',_0x30a865)),_0x23148c=await getCountFromServer(_0x2c0a4a);return _0x23148c[_0x4d90c6(0x1d5)]()[_0x4d90c6(0x10e)];}async function updateMessageLimit(){const _0x1dc98a=_0x55db92,_0x1b033b={'lbIyM':function(_0x51d77a,_0x159e2f){return _0x51d77a||_0x159e2f;},'rhHWy':'👑\x20أنت\x20مسؤول\x20-\x20يمكنك\x20إرسال\x20رسائل\x20غير\x20محدودة','SqIye':function(_0x292851,_0x30ef3e){return _0x292851(_0x30ef3e);},'GbMOz':function(_0x39af78,_0x22196e){return _0x39af78-_0x22196e;},'JEvix':function(_0x343f12,_0x2134db){return _0x343f12<=_0x2134db;},'SFMcZ':_0x1dc98a(0x10a),'gbCEU':_0x1dc98a(0x107),'lOVyX':_0x1dc98a(0x1b8)};if(_0x1b033b['lbIyM'](!currentUser,isAdmin)){limitInfo[_0x1dc98a(0x182)]=isAdmin?_0x1b033b['rhHWy']:'',sendBtn[_0x1dc98a(0x11f)]=![];return;}userMessageCount=await _0x1b033b['SqIye'](getTodaysMessageCount,currentUser['uid']);const _0x4caff7=_0x1b033b[_0x1dc98a(0x184)](DAILY_MESSAGE_LIMIT,userMessageCount);_0x1b033b[_0x1dc98a(0x1d3)](_0x4caff7,0x0)?(limitInfo[_0x1dc98a(0x182)]=_0x1b033b[_0x1dc98a(0x195)],limitInfo[_0x1dc98a(0x136)]=_0x1dc98a(0x19f),sendBtn[_0x1dc98a(0x11f)]=!![],messageInput[_0x1dc98a(0x115)]=_0x1b033b[_0x1dc98a(0x159)]):(limitInfo['textContent']='📊\x20الرسائل\x20المتبقية\x20اليوم:\x20'+_0x4caff7+_0x1dc98a(0x12a)+DAILY_MESSAGE_LIMIT,limitInfo['className']=_0x1b033b['lOVyX'],sendBtn['disabled']=![],messageInput[_0x1dc98a(0x115)]=_0x1dc98a(0x11a));}async function deleteAllMessages(){const _0x56c359=_0x55db92,_0x726b36={'fljFF':function(_0x45f440,_0x200af7){return _0x45f440(_0x200af7);},'zrqmB':function(_0x596580,_0x278945,_0x5590e9,_0x2b6d87){return _0x596580(_0x278945,_0x5590e9,_0x2b6d87);},'PKkdk':_0x56c359(0x179),'esvTL':function(_0x4c558c,_0x2a6eb2,_0x11e005){return _0x4c558c(_0x2a6eb2,_0x11e005);},'jaiNg':_0x56c359(0x110),'UwrRE':_0x56c359(0x160),'WRwLX':_0x56c359(0x1a7),'mPmne':function(_0x3552f3,_0x5ceba1,_0x6b9f19){return _0x3552f3(_0x5ceba1,_0x6b9f19);},'wBQvt':_0x56c359(0x19d),'gMwhM':_0x56c359(0x194)};if(!isAdmin){_0x726b36[_0x56c359(0x113)](showAdminAlert,'⛔\x20ليس\x20لديك\x20صلاحية\x20حذف\x20الرسائل',_0x56c359(0x1a7));return;}showConfirmationDialog(_0x726b36['wBQvt'],_0x726b36[_0x56c359(0x104)],async()=>{const _0x460119=_0x56c359,_0x23bb2c={'kPSAg':function(_0x25aadf,_0x1229e4){const _0x5358e9=_0xa8d7;return _0x726b36[_0x5358e9(0x138)](_0x25aadf,_0x1229e4);},'OGuwK':function(_0x373ed3,_0x44a135,_0x51cf30,_0x1b9e94){const _0x4314d6=_0xa8d7;return _0x726b36[_0x4314d6(0x117)](_0x373ed3,_0x44a135,_0x51cf30,_0x1b9e94);},'AIApO':_0x726b36[_0x460119(0x16a)]};try{const _0xd4c3bc=await _0x726b36['fljFF'](getDocs,messagesRef),_0x2797c8=[];let _0x43a66a=0x0;_0xd4c3bc[_0x460119(0x1a4)](_0x2f0f02=>{const _0x361db7=_0x460119;_0x2797c8[_0x361db7(0x155)](_0x23bb2c[_0x361db7(0x1c3)](deleteDoc,_0x23bb2c[_0x361db7(0x140)](doc,db,_0x23bb2c[_0x361db7(0x127)],_0x2f0f02['id']))),_0x43a66a++;}),await Promise[_0x460119(0x1b9)](_0x2797c8),_0x726b36[_0x460119(0x12b)](showAdminAlert,_0x460119(0x144)+_0x43a66a+_0x460119(0x150),_0x460119(0x148));}catch(_0x3ac78f){console[_0x460119(0x1a7)](_0x726b36['jaiNg'],_0x3ac78f),showAdminAlert(_0x726b36[_0x460119(0x13b)],_0x726b36['WRwLX']);}});}function showAdminAlert(_0x36ca92,_0x3f491f=_0x55db92(0x11c)){const _0x442d25=_0x55db92,_0x14dd1a={'GUNse':function(_0x714da7,_0x11228b){return _0x714da7===_0x11228b;},'EkGqa':_0x442d25(0x196),'aaHfR':function(_0x81aac3,_0x46a2f9){return _0x81aac3===_0x46a2f9;},'fTFXt':function(_0x5c789e,_0x5ef60e){return _0x5c789e===_0x5ef60e;},'wGEKV':_0x442d25(0x1a7),'FbCgQ':'button','wYgMf':_0x442d25(0x1ae),'njMZn':_0x442d25(0x1b2),'Krbzy':function(_0x5151ef,_0x2fde12){return _0x5151ef===_0x2fde12;},'YnCCE':'#e74c3c','SpEEu':_0x442d25(0x16d)},_0x4552b0=document[_0x442d25(0x14f)](_0x14dd1a[_0x442d25(0x189)]);_0x4552b0[_0x442d25(0x100)][_0x442d25(0x1b4)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed;\x0a\x20\x20\x20\x20\x20\x20\x20\x20top:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20left:\x200;\x0a\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20height:\x20100%;\x0a\x20\x20\x20\x20\x20\x20\x20\x20background:\x20rgba(0,0,0,0.5);\x0a\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x209999;\x0a\x20\x20\x20\x20\x20\x20\x20\x20display:\x20flex;\x0a\x20\x20\x20\x20\x20\x20\x20\x20align-items:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20justify-content:\x20center;\x0a\x20\x20\x20\x20\x20\x20';const _0x4a4764=document[_0x442d25(0x14f)](_0x442d25(0x196));_0x4a4764[_0x442d25(0x100)][_0x442d25(0x1b4)]=_0x442d25(0x11b);const _0x39f0d8=_0x14dd1a[_0x442d25(0x133)](_0x3f491f,'success')?'✅':_0x14dd1a[_0x442d25(0x1c7)](_0x3f491f,_0x14dd1a[_0x442d25(0x13d)])?'❌':'ℹ️',_0x12cf37=document[_0x442d25(0x14f)]('p');_0x12cf37[_0x442d25(0x182)]=_0x39f0d8+'\x20'+_0x36ca92,_0x12cf37[_0x442d25(0x100)][_0x442d25(0x1b4)]=_0x442d25(0x17b);const _0x5de971=document['createElement'](_0x14dd1a[_0x442d25(0x1b5)]);_0x5de971[_0x442d25(0x182)]=_0x14dd1a[_0x442d25(0x126)],_0x5de971[_0x442d25(0x100)]['cssText']=_0x442d25(0x145)+(_0x14dd1a[_0x442d25(0x1c7)](_0x3f491f,_0x442d25(0x148))?_0x14dd1a[_0x442d25(0x1be)]:_0x14dd1a[_0x442d25(0x13f)](_0x3f491f,_0x14dd1a[_0x442d25(0x13d)])?_0x14dd1a[_0x442d25(0x1ba)]:_0x14dd1a[_0x442d25(0x1a8)])+_0x442d25(0x1c0),_0x5de971[_0x442d25(0x14b)]=()=>_0x5de971[_0x442d25(0x100)][_0x442d25(0x143)]=_0x3f491f===_0x442d25(0x148)?_0x442d25(0x121):_0x3f491f==='error'?_0x442d25(0x17f):_0x442d25(0x129),_0x5de971[_0x442d25(0x112)]=()=>_0x5de971[_0x442d25(0x100)][_0x442d25(0x143)]=_0x3f491f==='success'?_0x442d25(0x1b2):_0x3f491f===_0x442d25(0x1a7)?_0x442d25(0x134):_0x442d25(0x16d),_0x5de971[_0x442d25(0x153)]=()=>{const _0x1844fc=_0x442d25;document['body'][_0x1844fc(0x11d)](_0x4552b0);},_0x4a4764[_0x442d25(0x137)](_0x12cf37),_0x4a4764[_0x442d25(0x137)](_0x5de971),_0x4552b0[_0x442d25(0x137)](_0x4a4764),document[_0x442d25(0x1c9)][_0x442d25(0x137)](_0x4552b0),_0x4552b0['onclick']=_0x4378e8=>{const _0x27abec=_0x442d25;_0x14dd1a[_0x27abec(0x181)](_0x4378e8['target'],_0x4552b0)&&document[_0x27abec(0x1c9)]['removeChild'](_0x4552b0);},_0x5de971['focus']();}function showConfirmationDialog(_0x18310e,_0x13a684,_0x367e9b){const _0x44200c=_0x55db92,_0x574a2d={'umFls':_0x44200c(0x196),'JAciI':'button','JTdPF':'نعم،\x20احذف\x20الكل','KiEEc':_0x44200c(0x1b3)},_0x4a3d9c=document[_0x44200c(0x14f)](_0x44200c(0x196));_0x4a3d9c['style'][_0x44200c(0x1b4)]=_0x44200c(0x16c);const _0x42313f=document[_0x44200c(0x14f)](_0x574a2d[_0x44200c(0x19c)]);_0x42313f[_0x44200c(0x100)][_0x44200c(0x1b4)]=_0x44200c(0x193);const _0x1c4566=document['createElement']('h3');_0x1c4566[_0x44200c(0x182)]=_0x18310e,_0x1c4566['style'][_0x44200c(0x1b4)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#e74c3c;\x0a\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x2015px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2022px;\x0a\x20\x20\x20\x20\x20\x20';const _0x597d28=document[_0x44200c(0x14f)]('p');_0x597d28['textContent']=_0x13a684,_0x597d28['style']['cssText']=_0x44200c(0xff);const _0x2515f5=document[_0x44200c(0x14f)](_0x44200c(0x196));_0x2515f5['style']['cssText']=_0x44200c(0x122);const _0x472be2=document[_0x44200c(0x14f)](_0x574a2d[_0x44200c(0x1bf)]);_0x472be2[_0x44200c(0x182)]=_0x574a2d[_0x44200c(0x18a)],_0x472be2[_0x44200c(0x100)][_0x44200c(0x1b4)]=_0x44200c(0x102);const _0x3f72bf=document[_0x44200c(0x14f)](_0x574a2d[_0x44200c(0x1bf)]);_0x3f72bf['textContent']=_0x574a2d[_0x44200c(0x1c4)],_0x3f72bf[_0x44200c(0x100)][_0x44200c(0x1b4)]=_0x44200c(0x1b1),_0x472be2[_0x44200c(0x14b)]=()=>_0x472be2['style']['background']='#c0392b',_0x472be2[_0x44200c(0x112)]=()=>_0x472be2[_0x44200c(0x100)]['background']=_0x44200c(0x134),_0x3f72bf[_0x44200c(0x14b)]=()=>_0x3f72bf[_0x44200c(0x100)][_0x44200c(0x143)]=_0x44200c(0x1aa),_0x3f72bf['onmouseout']=()=>_0x3f72bf['style'][_0x44200c(0x143)]='#95a5a6',_0x472be2[_0x44200c(0x153)]=()=>{const _0x1b902c=_0x44200c;document['body'][_0x1b902c(0x11d)](_0x4a3d9c),_0x367e9b();},_0x3f72bf[_0x44200c(0x153)]=()=>{const _0x2b770c=_0x44200c;document[_0x2b770c(0x1c9)][_0x2b770c(0x11d)](_0x4a3d9c);},_0x2515f5[_0x44200c(0x137)](_0x472be2),_0x2515f5[_0x44200c(0x137)](_0x3f72bf),_0x42313f['appendChild'](_0x1c4566),_0x42313f[_0x44200c(0x137)](_0x597d28),_0x42313f[_0x44200c(0x137)](_0x2515f5),_0x4a3d9c['appendChild'](_0x42313f),document['body'][_0x44200c(0x137)](_0x4a3d9c),_0x3f72bf[_0x44200c(0x19a)]();}function autoLogin(){const _0x36aba1=_0x55db92,_0x231c1e={'XbgtJ':_0x36aba1(0x176),'ZYBff':_0x36aba1(0x120),'xuOLL':function(_0x35cec6,_0x5812dd,_0x31ad6e){return _0x35cec6(_0x5812dd,_0x31ad6e);},'vJSis':_0x36aba1(0x1d7),'gxBQZ':_0x36aba1(0x1d8),'JqHuJ':_0x36aba1(0x1cf),'xhvFM':_0x36aba1(0x1c8),'sLHPD':_0x36aba1(0x105),'tqXQu':_0x36aba1(0x14d)},_0xf5c8ab=new GoogleAuthProvider();_0xf5c8ab[_0x36aba1(0x13c)](_0x231c1e[_0x36aba1(0x149)]),_0xf5c8ab['addScope'](_0x231c1e[_0x36aba1(0x1d4)]),loginEmail['textContent']=_0x231c1e['tqXQu'],_0x231c1e[_0x36aba1(0x15a)](signInWithPopup,auth,_0xf5c8ab)[_0x36aba1(0x10d)](_0x2ab890=>{const _0x521eb7=_0x36aba1;console['log'](_0x231c1e[_0x521eb7(0x165)]),console['log'](_0x231c1e['ZYBff'],_0x2ab890[_0x521eb7(0x1a5)][_0x521eb7(0x105)]);})['catch'](_0x231ef1=>{const _0x5f5d15=_0x36aba1;console['error'](_0x231c1e[_0x5f5d15(0xfe)],_0x231ef1),loginBtn[_0x5f5d15(0x100)][_0x5f5d15(0x152)]=_0x231c1e[_0x5f5d15(0x192)],authSection[_0x5f5d15(0x1ce)]=_0x5f5d15(0x17a),document['getElementById'](_0x231c1e[_0x5f5d15(0x139)])[_0x5f5d15(0x135)](_0x5f5d15(0x167),()=>{const _0x2556ac=_0x5f5d15;_0x231c1e[_0x2556ac(0x15a)](signInWithPopup,auth,_0xf5c8ab);});});}function _0x2191(){const _0x23ca4f=['A2v5','y2HHDfnLy3rPB24','A1btqwC','s2Lfrwm','zgrjs2y','pc9KAxy+','zLrgwhq','ChjVzMLSzq','yM9KEq','BxDVzMi','C2nYB2XSvg9W','uMrqwuW','mJG5nJuXnZblzKDNALG','Aw5Uzxjive1m','Bg9NAw5cDg4','2ytzGTIVinIN2lpyQTMg2yhyR9IQinI52k/yRYdyP9Me2lhyS9IN2kBzHcdyP9Me2yxyS9Mf2yJyRsdyQnMhinIN2ytzITMi2yuGkdmG2lhyS9IN2kBzHcK','AuXxzxi','ELndExC','sKv2AxG','C0Xiueq','zgf0yq','pgrPDIbJBgfZCZ0Izw1IzwrKzwqTy29UDgvUDci+cIaGicaGicaGicaGicaGicaGidXKAxyGy2XHC3m9iMLTywDLlwLUzgLJyxrVCIi+cIaGicaGicaGicaGicaGicaGicaGpgKGy2XHC3m9iMzHCYbMys1PBwfNzsi+pc9PpIdyTDMi2lhyQqOGicaGicaGicaGicaGicaGica8l2rPDJ4kicaGicaGicaGicaGicaGicaGpgLTzYbZCMm9iG','4P2minIU2lFyOYdzGDMkinIN2ytyQTIZ2kZzITMeinIN2ytyQTMe2ylyP9IM2yO6','zMXLEa','DKPtAxm','cIaGicaGicaGzM9UDc1ZAxPLoIaXnNb4oWOGicaGicaGignVBg9YoIaJntu1oWOGicaGicaGig1HCMDPBI1IB3r0B206idi1ChG7cIaGicaGicaGBgLUzs1OzwLNAhq6ideUnJSkicaGicaGicb3AgL0zs1ZCgfJztOGChjLlwXPBMu7cIaGicaGia','C3r5Bgu','iIbHBhq9iMf2yxrHCIi+cIaGicaGicaGica8zgL2ignSyxnZpsjTzxnZywDLlwnVBNrLBNqIpGOGicaGicaGicaGica8zgL2ignSyxnZpsjTzxnZywDLlwHLywrLCIi+cIaGicaGicaGicaGicaGphnWyw4+','cIaGicaGicaGyMfJA2DYB3vUzdOGi2u3ngmZyZSkicaGicaGicbJB2XVCJOGD2HPDgu7cIaGicaGicaGyM9YzgvYoIbUB25LoWOGicaGicaGihbHzgrPBMC6ideYChGGmJvWEdSkicaGicaGicbIB3jKzxiTCMfKAxvZoIaYnxb4oWOGicaGicaGigzVBNqTC2L6ztOGmtzWEdSkicaGicaGicbJDxjZB3i6ihbVAw50zxi7cIaGicaGicaGDhjHBNnPDgLVBJOGmc4ZCZSkicaGicaGicbMB250lxDLAwDODdOGyM9SzdSkicaGicaG','ndeWnJrwtK15q3C','z013Ae0','zw1HAwW','rxLksvm','2ytzGTIVinIN2lpyQTMg2yhyR9IQinI52k/yRYdyP9Me2lhyS9IN2kBzHcdyP9Me2yRzInMf','Ahr0Chm6lY93D3CUEw91DhvIzs5JB20Vzw1IzwqV','ww1rDgW','4P2minMe2ylyRYdyP9IZ2kRzHTMb2k/yQIdyUDIV2k8G2kFzHnIX2lpyP9IM2yqG2kFzHnMf2lpzHDMi2k0G2kJzHYdyP9Me2yRzInMf','r2TyrfG','C3bSAxq','DgHLBG','y291BNq','pc9ZCgfUpGOGicaGicaGicaGica8l2rPDJ4kicaGicaGicaGicaGpgrPDIbJBgfZCZ0IBwvZC2fNzs10zxH0iJ4','rxjYB3iGzgvSzxrPBMCGBwvZC2fNzxm6','ENDzwhi','B25TB3vZzw91Da','BvbTBMu','Bg9N','CgXHy2vOB2XKzxi','AhnUnubilMnVBq','ENjXBui','mtaYnJG2ntC1mdqXnq','icaGicaGicaGiaOGicaGicaGicaGpgLTzYbJBgfZCZ0IyxzHDgfYiIbZCMm9iG','2kFzG9IQ2kGG2lhyS9IN2ytyQTMdinIJ2yGG2kpySDMb2yiG2lhyP9IO2lCG2yRzInIQ2yRzInIOinIJ2yGG2lxzInIX2kKUlI4','cIaGicaGicaGyMfJA2DYB3vUzdOGD2HPDgu7cIaGicaGicaGCgfKzgLUzZOGmZbWEdSkicaGicaGicbIB3jKzxiTCMfKAxvZoIaXnxb4oWOGicaGicaGigjVEc1ZAgfKB3C6idaGmtbWEcaZmhb4ihjNyMeOmcWWldaSmc4ZktSkicaGicaGicb0zxH0lwfSAwDUoIbJzw50zxi7cIaGicaGicaGBwf4lxDPzhrOoIa0mdbWEdSkicaGicaGicb3Awr0AdOGotaLoWOGicaGicaGigzVBNqTzMfTAwX5oIaNu2vNB2uGvuKNlcbuywHVBweSihnHBNmTC2vYAwy7cIaGicaGia','Aw5MBW','CMvTB3zLq2HPBgq','A2v5ChjLC3m','zgLZywjSzwq','8j+tPYdyP9Me2kJySDMk2k8G2kFzHnIL2ytzG9IQ2lhzInMg2yO6','iZiYotK1na','cIaGicaGicaGzgLZCgXHEtOGzMXLEdSkicaGicaGicbQDxn0Awz5lwnVBNrLBNq6ignLBNrLCJSkicaGicaGicbNyxa6ide1ChG7cIaGicaGia','s0nLBwO','2k3yR9IRinIU2lFyOYdyO9IR2yByP9IHinIQ2lpyRnMk2yqG2kFzHnIV2k7zInMelG','Dhvfzfu','D1LNtwy','quLbCe8','C2HVDY1Hzg1PBG','iZi5odbIoq','inMf2yyG','zxn2veW','pgrPDIbJBgfZCZ0Izw1IzwrKzwqTy29UDgvUDci+cIaGicaGicaGicaGicaGicaGidXKAxyGy2XHC3m9iNzPzgvVlwLUzgLJyxrVCIi+cIaGicaGicaGicaGicaGicaGicaGpgKGy2XHC3m9iMzHyIbMys15B3v0DwjLiJ48l2K+inMb2yRyR9Mk2yGGww91vhvIzqOGicaGicaGicaGicaGicaGica8l2rPDJ4kicaGicaGicaGicaGicaGicaGpgLMCMfTzsbZCMm9iG','wvLnv2m','tgzKz3C','mtb8mhW0Fdn8mtj8mtr8mxWXmxW1Fde1Fdj8n3WXm3W5Fdz8oa','Ahr0Chm6lY91As1HDMf0yxjZlMnVBs9HCgKVp25HBwu92j8MyMfJA2DYB3vUzd0ZndK4zgiMy29SB3i9zMzM','nJe4mZq5r2noAKnn','yxv0AfnLy3rPB24','ywfizLi','i2u3ngmZyW','ywrKrxzLBNrmAxn0zw5LCG','y2XHC3noyw1L','yxbWzw5Kq2HPBgq','zMXQrKy','sNfiDuO','CuzOBKy','vxDYuKu','ywrKu2nVCgu','D0Dfs1y','C2vJB25KCW','s3jIENK','t0D1D0S','nMvlBgjLqG','BwvZC2fNzxm','yMfJA2DYB3vUza','4PYfinIQ2yuG2k3ySnMbia','cIaGicaGicaGyMfJA2DYB3vUzdOG','qKHOBKi','nty1nty3muLntNzfrG','C3vJy2vZCW','EgH2rK0','Bg9NAw5fBwfPBa','B25TB3vZzw92zxi','mtyYEgPXrKji','2kZyP9IX2yOG2kFzHnIQ2k3zGTMcinMf2yyG2kFzHnMh2yJzITIPlI4U','jYWGj19IBgfUAYCPiGOGicaGicaGicaGicaGicaGicaGicaGihn0EwXLpsjJDxjZB3i6ihbVAw50zxi7iIaVpGOGicaGicaGicaGicaGicaGpc9KAxy+','y3jLyxrLrwXLBwvUDa','inIX2lpyP9Me2kKG2kJzHTIS2kFyRq','8j+rPcdyQTMfinIQ2lpyRnMk2yqG2kFzHnIV2k7zInMeinMd2ya6','zgLZCgXHEq','B25JBgLJAW','veLwrM4','ChvZAa','qKnMvwO','iIbHBhq9iTI12yJySDIPinMf2lhzGDMc2kKIiaOGicaGicaGicaGicaGicaGicaGicaGig9UzxjYB3i9iNrOAxmUC3r5BguUzgLZCgXHEt0NBM9UzsC7ihrOAxmUCgfYzw50rwXLBwvUDc5PBM5LCKHutuW9jZXHigHYzwy9jW','z2v0rgf0zq','z2jdrvu','EhvpteW','jYb0yxjNzxq9j19IBgfUAYC+','CMvTB3zL','zgLZCgXHEu5HBwu','zgvSzxrLqwXSqNrU','C3jJ','4P2minIT2k/yQYdyRTI32kmG2kpyQ9Mg2kFyOsdyRDIW2yeG2kFzHnIX2lpyP9IM2yq','iIb0yxjNzxq9iL9IBgfUAYiGCMvSpsjUB29Wzw5LCIbUB3jLzMvYCMvYiJ4','8j+rKsdzH9MeinMh2yGG2yxyS9IK2yJzHnIFoG','tefRwuO','8j+tPYdyP9Me2kJySDMk2k8G2kFzHnMf2lFzHnMi2kG6','wgjNDeO','DMfSDwu','y2XPy2S','pc9KAxy+cIaGicaGicaGica8l2rPDJ4kicaGicaGica','vw5HDLe','ueTRzgS','C2jHCs1MyZq2zG','cIaGicaGicaGCg9ZAxrPB246igzPEgvKoWOGicaGicaGihrVCdOGmdSkicaGicaGicbSzwz0oIaWoWOGicaGicaGihDPzhrOoIaXmdaLoWOGicaGicaGigHLAwDODdOGmtaWjtSkicaGicaGicbIywnRz3jVDw5KoIbYz2jHkdaSmcWWldaUnYK7cIaGicaGicaGEI1PBMrLEdOGmtaWmda7cIaGicaGicaGzgLZCgXHEtOGzMXLEdSkicaGicaGicbHBgLNBI1PDgvTCZOGy2vUDgvYoWOGicaGicaGigP1C3rPzNKTy29UDgvUDdOGy2vUDgvYoWOGicaGica','iZm0otHKyG','mta1oti2ne1Sqxbkza','8j+tPYdyP9Me2kJySDMk2k8G2kFzHnIT2kFzHnMkoG','p2f1Dg9WBgf5pteMBxv0zt0XjNjLBd0W','wLbvsMC','2yxyS9IQ2k7yR9Mf','mZyXotGZnuP2yujswG','CMvWBgfJzq','rxjYB3iGC2vUzgLUzYbTzxnZywDLoG','4PYfinIQ2yuG2kRyS9IS2yRzHcdyP9Me2k/yRTMi2yqG2kRzHnMc2kFyPTMk2kFzIYdyQnMg2kZyP9IT','yw9mB1y','zgvSzxrLqwXSqM90Dg9TqNrU','y2HHDe1LC3nHz2vZ','cIaGicaGicaGicaGidXWpTIT2k/yQYdyRTI32kmG2yhzIIdyP9Me2kRyS9IS2yRzHcdyP9Me2kRzHnMc2kFyPTMkpc9WpGOGicaGicaGicaGica8Cd7yP9Me2lhyRnIN2keG2kRyS9IS2yRzHcdyP9Me2k/yRTMi2yqG2yRyR9Mi2yRyP9Mlpc9WpGOGicaGicaGicaGica8yNv0Dg9UigLKpsjSB2DPBKj0BIi+pgKGy2XHC3m9iMzHyIbMys1NB29NBguIpJWVAt4G2kFzHnIV2k7zInMeinIO2k3yS9IN2kGGr29Vz2XLpc9IDxr0B24+cIaGicaGicaGica','cIaGicaGicaGzM9UDc1ZAxPLoIaXohb4oWOGicaGicaGignVBg9YoIaJmZmZoWOGicaGicaGig1HCMDPBI1IB3r0B206idi1ChG7cIaGicaGicaGBgLUzs1OzwLNAhq6ideUntSkicaGicaGicbMB250lxDLAwDODdOGyM9SzdSkicaGicaG','swXvEgy','DxnLCLbOB3rV','Bg9Hza','i2mWmZKYyG','C2v0rgf0zq','r1voC2u','Dgv4DenVBNrLBNq','tNn2qM8','r2jnt3O','BM9Uzq','ywrK','pc9HpIC7iIakicaGicaGicaGicaGicaGicaGicaGicbVBMnSAwnRpsj3Aw5KB3CUB3bLBIGN','sKTSyui','rwThCwe','sLrKuey','ugnKuK4','vvnMAxe','wKr3swG','mti4ogvjsfjArG','pgeGAhjLzJ0I','Bg9NB3v0qNrU','uKTRr0u','z3HcuvO','cIaGicaGicaGyMfJA2DYB3vUzdOGD2HPDgu7cIaGicaGicaGCgfKzgLUzZOGmZbWEdSkicaGicaGicbIB3jKzxiTCMfKAxvZoIaXnxb4oWOGicaGicaGigjVEc1ZAgfKB3C6idaGmtvWEca0mhb4ihjNyMeOmcWWldaSmc40ktSkicaGicaGicb0zxH0lwfSAwDUoIbJzw50zxi7cIaGicaGicaGBwf4lxDPzhrOoIa0ntbWEdSkicaGicaGicb3Awr0AdOGotaLoWOGicaGicaGigzVBNqTzMfTAwX5oIaNu2vNB2uGvuKNlcbuywHVBweSihnHBNmTC2vYAwy7cIaGicaGia','2yFzHcdyO9Mg2kOG2yxyQTIJ2ypyRYdzHDMginIT2ldzGsdyRnMf2yRyUsdyP9Me2lhyS9IN2kBzHnIFcGRzH9IW2kCG2kFzHnIL2kZySDIN2keG2ytyPYdzITMf2ypzHIdyP9Me2kRySDIN2kZyUsdyUDMg2yCG2yJyS9Mk2kRzHsdyRDIW2yeG2kZzHDMk2lKG2kFzHnMf2k3yP9IV2kVyP9IQiq','u0zny1O','zgL2','nJK5m3DkAgPyBW','pc9HpG','DM5qtgm','zM9JDxm','C2jHCs1MyZq2zI5MAxjLyMfZzxn0B3jHz2uUyxbW','Dw1gBhm','4PQG77IpinIQ2kpzG9Mk2k8G2kFzHnIT2ldzGq','z2v0rwXLBwvUDej5swq','BgLTAxqTAw5MBYbSAw1PDc13yxjUAw5N','BwvZC2fNzq','phnWyw4Gy2XHC3m9iMfKBwLUlwjHzgDLiJ7zHDIZ2ktzInMepc9ZCgfUpG','CgHVDg9vuKW','DgLTzxn0yw1W','zM9YrwfJAa','DxnLCG','BwvZC2fNzuLUChv0','zxjYB3i','u3bfrxu','sNfkqwK','iZDMogm4za','C29YDa','DxnLCKLUzM8','qLDkAwO','2yxzInIN2yhzGG','iIakicaGicaGicaGicaGicaGicaGicaGicaGicbMCMfTzwjVCMrLCJ0ImciGcIaGicaGicaGicaGicaGicaGicaGicaGicaGywXSB3C9iMfJy2vSzxjVBwv0zxi7igf1Dg9WBgf5oYbJBgLWyM9HCMqTD3jPDgu7igvUy3j5ChrLzc1TzwrPytSGz3LYB3nJB3bLoYbWAwn0DxjLlwLUlxbPy3r1CMuIiaOGicaGicaGicaGicaGicaGicaGicaGicaGigfSBg93zNvSBhnJCMvLBJ4kicaGicaGicaGicaGicaGicaGpc9PzNjHBwu+cIaGicaGicaGicaGicaGica8l2rPDJ4','tg9NAw4GzxjYB3i6','cIaGicaGicaGyMfJA2DYB3vUzdOGiZK1ytvHnJSkicaGicaGicbJB2XVCJOGD2HPDgu7cIaGicaGicaGyM9YzgvYoIbUB25LoWOGicaGicaGihbHzgrPBMC6ideYChGGmJvWEdSkicaGicaGicbIB3jKzxiTCMfKAxvZoIaYnxb4oWOGicaGicaGigzVBNqTC2L6ztOGmtzWEdSkicaGicaGicbJDxjZB3i6ihbVAw50zxi7cIaGicaGicaGDhjHBNnPDgLVBJOGmc4ZCZSkicaGicaG','iZi3ywu2ma','2kxzHnI62kFyOq','y3nZvgv4Da','rMjdz1e','rw50zxi','y2XHC3nmAxn0','BgLTAxqTAw5MBW','ywXS','ww5dq0u','veP6wLC','DwLK','Aw5JBhvKzxm','BMPnwM4','sKfJAuK','oWOGicaGicaGignVBg9YoIb3AgL0ztSkicaGicaGicbIB3jKzxi6ig5VBMu7cIaGicaGicaGCgfKzgLUzZOGmtbWEcaZmhb4oWOGicaGicaGigjVCMrLCI1YywrPDxm6idi1ChG7cIaGicaGicaGzM9UDc1ZAxPLoIaXnNb4oWOGicaGicaGign1CNnVCJOGCg9PBNrLCJSkicaGicaGicb0CMfUC2L0Aw9UoIaWlJnZoWOGicaGica'];_0x2191=function(){return _0x23ca4f;};return _0x2191();}window[_0x55db92(0x135)](_0x55db92(0x17e),()=>{const _0x2da5d3={'YYMWc':function(_0x539f60){return _0x539f60();},'bPgzg':function(_0x1ec6f9,_0x7c50d4,_0x1fcd2c){return _0x1ec6f9(_0x7c50d4,_0x1fcd2c);}};_0x2da5d3['bPgzg'](setTimeout,()=>{const _0x30fba7=_0xa8d7;_0x2da5d3[_0x30fba7(0x12d)](autoLogin);},0x3e8);}),loginBtn[_0x55db92(0x135)]('click',async()=>{const _0x5dcfc4=_0x55db92,_0x59f3ba={'RdPYL':function(_0x59793a,_0x17d19f,_0x25e652){return _0x59793a(_0x17d19f,_0x25e652);},'RKkGE':_0x5dcfc4(0x1b0),'mwofb':_0x5dcfc4(0x124)},_0x25ea76=new GoogleAuthProvider();try{await _0x59f3ba[_0x5dcfc4(0x1cc)](signInWithPopup,auth,_0x25ea76);}catch(_0x2ba06b){console[_0x5dcfc4(0x1a7)](_0x59f3ba[_0x5dcfc4(0x191)],_0x2ba06b),alert(_0x59f3ba[_0x5dcfc4(0x1ca)]);}}),logoutBtn[_0x55db92(0x135)]('click',()=>{const _0x3eb5b0=_0x55db92,_0x17816={'gRJrx':function(_0x1f9d20,_0x1c02c1){return _0x1f9d20(_0x1c02c1);},'NsvBo':'هل\x20تريد\x20تسجيل\x20الخروج؟'};_0x17816['gRJrx'](confirm,_0x17816[_0x3eb5b0(0x183)])&&_0x17816['gRJrx'](signOut,auth)['then'](()=>{location['reload']();});}),deleteAllBtn['addEventListener']('click',deleteAllMessages),deleteAllBottomBtn['addEventListener'](_0x55db92(0x167),deleteAllMessages),sendBtn[_0x55db92(0x135)](_0x55db92(0x167),sendMessage),messageInput['addEventListener'](_0x55db92(0x11e),_0x306d82=>{const _0x5eb633=_0x55db92,_0x11228e={'LAkYJ':function(_0x2116dc,_0x14767c){return _0x2116dc===_0x14767c;},'JKlaB':function(_0x1935e4){return _0x1935e4();}};if(_0x11228e[_0x5eb633(0x163)](_0x306d82[_0x5eb633(0x1c1)],_0x5eb633(0x1b6)))_0x11228e[_0x5eb633(0x188)](sendMessage);});async function sendMessage(){const _0x5226ae=_0x55db92,_0x49dee4={'LLbzz':function(_0x458f12,_0x145a19){return _0x458f12>=_0x145a19;},'zSCyw':function(_0x21135c,_0xcd8287,_0x200d67){return _0x21135c(_0xcd8287,_0x200d67);},'vnPLc':_0x5226ae(0x1a7),'qFhnF':_0x5226ae(0x172),'YmQtl':_0x5226ae(0x130),'tuEdU':function(_0x2674af){return _0x2674af();},'GkXDX':function(_0x4e06f8){return _0x4e06f8();},'VhuUd':_0x5226ae(0x175),'UnavQ':'حدث\x20خطأ\x20أثناء\x20إرسال\x20الرسالة'},_0x4222e1=messageInput[_0x5226ae(0x166)]['trim']();if(!_0x4222e1||!currentUser)return;if(!isAdmin&&_0x49dee4['LLbzz'](userMessageCount,DAILY_MESSAGE_LIMIT)){_0x49dee4[_0x5226ae(0x1d2)](showAdminAlert,_0x5226ae(0x1d0),_0x49dee4[_0x5226ae(0x199)]);return;}try{await addDoc(messagesRef,{'text':_0x4222e1,'uid':currentUser[_0x5226ae(0x1bc)],'name':currentUser[_0x5226ae(0x15d)]||_0x49dee4[_0x5226ae(0x13a)],'email':currentUser[_0x5226ae(0x105)]||'','photoURL':currentUser['photoURL']||_0x49dee4[_0x5226ae(0x109)],'timestamp':_0x49dee4[_0x5226ae(0x125)](serverTimestamp),'isAdmin':isAdmin}),messageInput[_0x5226ae(0x166)]='',messageInput[_0x5226ae(0x19a)](),!isAdmin&&(userMessageCount++,_0x49dee4[_0x5226ae(0x10b)](updateMessageLimit));}catch(_0x51c4d7){console[_0x5226ae(0x1a7)](_0x49dee4['VhuUd'],_0x51c4d7),alert(_0x49dee4[_0x5226ae(0x169)]);}}onAuthStateChanged(auth,async _0x1637ae=>{const _0x259f5f=_0x55db92,_0x1f6a66={'WgEoL':_0x259f5f(0x148),'PcdRN':_0x259f5f(0x130),'BHhnB':_0x259f5f(0x185),'iLWer':_0x259f5f(0x162),'rBRfD':function(_0x175caa,_0x5b4710){return _0x175caa===_0x5b4710;},'IlUxf':function(_0x1634e3){return _0x1634e3();},'Lfdgw':'flex','TIVFn':_0x259f5f(0x128),'ZPUJg':_0x259f5f(0x151),'zwYXr':'مستخدم','BCfUj':_0x259f5f(0x164),'USfiq':_0x259f5f(0x16f),'iFxwf':'🚫\x20لم\x20يتم\x20تسجيل\x20الدخول'};if(_0x1637ae){const _0xd5588e=_0x259f5f(0x12f)[_0x259f5f(0x10c)]('|');let _0x12c245=0x0;while(!![]){switch(_0xd5588e[_0x12c245++]){case'0':currentUser=_0x1637ae;continue;case'1':userPhoto[_0x259f5f(0x15f)]=_0x1637ae[_0x259f5f(0x1a2)]||_0x1f6a66[_0x259f5f(0x18b)];continue;case'2':authSection[_0x259f5f(0x100)][_0x259f5f(0x152)]=_0x1f6a66[_0x259f5f(0x146)];continue;case'3':console[_0x259f5f(0x114)](_0x1f6a66[_0x259f5f(0x1d1)],isAdmin);continue;case'4':isAdmin=_0x1f6a66['rBRfD'](_0x1637ae['email'],ADMIN_EMAIL);continue;case'5':loginEmail[_0x259f5f(0x182)]=_0x1637ae[_0x259f5f(0x105)];continue;case'6':await _0x1f6a66[_0x259f5f(0x17c)](updateMessageLimit);continue;case'7':chatSection[_0x259f5f(0x100)]['display']=_0x1f6a66[_0x259f5f(0x12e)];continue;case'8':isAdmin&&setTimeout(()=>{showAdminAlert('👑\x20مرحباً\x20يا\x20مسؤول!\x0a\x0aيمكنك\x20الآن\x20حذف\x20جميع\x20الرسائل\x20باستخدام\x20الزر\x20الأحمر\x20في\x20الأعلى\x20أو\x20الزر\x20في\x20الأسفل\x20بجانب\x20مربع\x20الكتابة',_0x1f6a66['WgEoL']);},0x5dc);continue;case'9':isAdmin?(deleteAllBtn['classList']['add'](_0x259f5f(0x128)),deleteAllBottomBtn[_0x259f5f(0x1b7)][_0x259f5f(0x186)](_0x259f5f(0x128))):(deleteAllBtn[_0x259f5f(0x1b7)]['remove'](_0x259f5f(0x128)),deleteAllBottomBtn[_0x259f5f(0x1b7)][_0x259f5f(0x15c)](_0x1f6a66[_0x259f5f(0x154)]));continue;case'10':console[_0x259f5f(0x114)](_0x1f6a66[_0x259f5f(0x171)],_0x1637ae[_0x259f5f(0x105)]);continue;case'11':userName['textContent']=_0x1637ae['displayName']||_0x1f6a66[_0x259f5f(0x111)];continue;case'12':console[_0x259f5f(0x114)](_0x1f6a66[_0x259f5f(0x156)],ADMIN_EMAIL);continue;case'13':logoutBtn[_0x259f5f(0x100)][_0x259f5f(0x152)]=_0x1f6a66[_0x259f5f(0x12e)];continue;case'14':console[_0x259f5f(0x114)](_0x1f6a66[_0x259f5f(0x18c)],_0x1637ae[_0x259f5f(0x105)]);continue;case'15':userInfo['style'][_0x259f5f(0x152)]=_0x1f6a66[_0x259f5f(0x12e)];continue;}break;}}else console[_0x259f5f(0x114)](_0x1f6a66['iFxwf']),currentUser=null,isAdmin=![],userMessageCount=0x0,authSection[_0x259f5f(0x100)][_0x259f5f(0x152)]=_0x1f6a66[_0x259f5f(0x12e)],chatSection[_0x259f5f(0x100)][_0x259f5f(0x152)]=_0x1f6a66[_0x259f5f(0x146)],logoutBtn[_0x259f5f(0x100)][_0x259f5f(0x152)]=_0x1f6a66[_0x259f5f(0x146)],deleteAllBtn[_0x259f5f(0x100)][_0x259f5f(0x152)]=_0x259f5f(0x185),deleteAllBottomBtn[_0x259f5f(0x100)]['display']=_0x1f6a66[_0x259f5f(0x146)],userInfo[_0x259f5f(0x100)][_0x259f5f(0x152)]=_0x259f5f(0x185),limitInfo['textContent']='';}),onSnapshot(messagesRef,_0x242f40=>{const _0x468cb8=_0x55db92,_0x3209b9={'EyJIS':function(_0x3aec10,_0x5749e5){return _0x3aec10-_0x5749e5;},'aoLoV':_0x468cb8(0x196),'Kdcig':_0x468cb8(0x1a0),'JqJAi':function(_0x104dd1,_0x4ce702){return _0x104dd1===_0x4ce702;}};messagesDiv[_0x468cb8(0x1ce)]='';const _0x432582=_0x242f40['docs'][_0x468cb8(0x1ab)]((_0x5247e2,_0x132a2a)=>{const _0x28e4a3=_0x468cb8,_0x5ebfeb=_0x5247e2[_0x28e4a3(0x1d5)]()[_0x28e4a3(0x1a3)]?.[_0x28e4a3(0x13e)]||0x0,_0x135ff6=_0x132a2a[_0x28e4a3(0x1d5)]()[_0x28e4a3(0x1a3)]?.[_0x28e4a3(0x13e)]||0x0;return _0x3209b9[_0x28e4a3(0x106)](_0x5ebfeb,_0x135ff6);});_0x432582[_0x468cb8(0x1a4)](_0x4392f4=>{const _0x169d51=_0x468cb8,_0x2633a9=_0x4392f4[_0x169d51(0x1d5)](),_0x16934c=document[_0x169d51(0x14f)](_0x3209b9[_0x169d51(0x177)]);_0x16934c['className']=_0x3209b9['Kdcig'];const _0x166b26=_0x3209b9[_0x169d51(0x1a9)](_0x2633a9[_0x169d51(0x105)],ADMIN_EMAIL)||_0x2633a9['isAdmin'],_0x15b46b=detectAndCreateLinks(_0x2633a9['text']);_0x16934c[_0x169d51(0x1ce)]=_0x169d51(0x119)+_0x2633a9[_0x169d51(0x1a2)]+_0x169d51(0x101)+_0x2633a9['name']+'\x20'+(_0x166b26?_0x169d51(0x1a1):'')+_0x169d51(0x10f)+_0x15b46b+_0x169d51(0x168),messagesDiv[_0x169d51(0x137)](_0x16934c);}),messagesDiv[_0x468cb8(0x1cb)]=messagesDiv['scrollHeight'];});
   </script>
 </body>
 </html>
